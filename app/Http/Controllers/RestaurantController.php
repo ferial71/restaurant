@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RestaurantCollection;
 use App\Models\restaurent;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth']);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware(['auth']);
+//    }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return RestaurantCollection
      */
     public function index()
     {
-        $restaurents = restaurent::all();
+        return new RestaurantCollection(restaurent::all());
+//        Collection(Player::all());
+//        $restaurents = restaurent::all();
 
-        return view('restaurents.index', compact('restaurents'));
+//        return json_encode($restaurents);
+//        return view('restaurants.index', compact('restaurents'));
     }
 
     /**
@@ -31,7 +35,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurents.create');
+        return view('restaurants.create');
     }
 
     /**
@@ -66,7 +70,7 @@ class RestaurantController extends Controller
     public function edit($id)
     {
         $restaurant = restaurent::findOrFail($id);
-        return view('restaurents.edit', compact('restaurant'));
+        return view('restaurants.edit', compact('restaurant'));
     }
 
     /**
