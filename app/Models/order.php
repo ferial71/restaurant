@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class order extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function meal()
+    {
+        return $this->hasMany('App\Models\meal');;
+    }
 }
